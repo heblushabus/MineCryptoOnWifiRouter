@@ -98,12 +98,12 @@ while True:
                     feedback = soc.recv(1024).decode().rstrip("\n")
                     # If result was good
                     if feedback == "GOOD":
-                        print "Accepted share", result,"Hashrate",int(hashrate/1000),"kH/s","Difficulty",difficulty)
+                        print "Accepted share", result,"Hashrate",int(hashrate/1000),"kH/s","Difficulty",difficulty
                         led(True)
                         break
                     # If result was incorrect
                     elif feedback == "BAD":
-                        print "Rejected share", result,"Hashrate", int(hashrate/1000),"kH/s","Difficulty",difficulty)
+                        print "Rejected share", result,"Hashrate", int(hashrate/1000),"kH/s","Difficulty",difficulty
                         led(False)
                         break
 
