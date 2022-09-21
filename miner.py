@@ -39,24 +39,6 @@ def fetch_pools():
             time.sleep(15)
 
 def led(status):
-    if leds == True:
-        if status == False:
-            f = open(f'/sys/class/leds/{rejected}/brightness','w')
-            f.write('1')
-            f.close()
-            time.sleep(0.3)
-            f = open(f'/sys/class/leds/{rejected}/brightness','w')
-            f.write('0')
-            f.close()
-        else:
-            f = open(f'/sys/class/leds/{accepted}/brightness','w')
-            f.write('1')
-            f.close()
-            time.sleep(0.3)
-            f = open(f'/sys/class/leds/{accepted}/brightness','w')
-            f.write('0')
-            f.close()
-    else:
         pass
 
 while True:
