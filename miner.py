@@ -41,6 +41,7 @@ def fetch_pools():
 def led(status):
         pass
 
+
 while True:
     try:
         print 'Searching for fastest connection to the server'
