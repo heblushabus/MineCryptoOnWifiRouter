@@ -13,7 +13,7 @@ import requests
 
 username = "Pichi" # add your username here, if set mining key after a colon. e.g. Pichi or Pichi:insecurepw
 
-leds = True # True if led notifications shouzld be enabled, if not, False.
+leds = False # True if led notifications shouzld be enabled, if not, False.
 accepted = "fritz4040:amber:info" # Name of the LED that should blink on a accepted share.
 rejected = "fritz4040:red:info" # Name of the LED that should blink on a rejected share.
 
@@ -35,7 +35,7 @@ def fetch_pools():
 
             return NODE_ADDRESS, NODE_PORT
         except Exception as e:
-            print (f'{current_time()} : Error retrieving mining node, retrying in 15s')
+            print "Error retrieving mining node, retrying in 15s"
             time.sleep(15)
 
 def led(status):
@@ -61,17 +61,17 @@ def led(status):
 
 while True:
     try:
-        print(f'{current_time()} : Searching for fastest connection to the server')
+        print 'Searching for fastest connection to the server'
         try:
             NODE_ADDRESS, NODE_PORT = fetch_pools()
         except Exception as e:
             NODE_ADDRESS = "server.duinocoin.com"
             NODE_PORT = 2813
-            print(f'{current_time()} : Using default server port and address')
+            print 'Using default server port and address'
         soc.connect((str(NODE_ADDRESS), int(NODE_PORT)))
-        print(f'{current_time()} : Fastest connection found')
+        print "Fastest connection found"
         server_version = soc.recv(100).decode()
-        print (f'{current_time()} : Server Version: '+ server_version)
+        #print (f'{current_time()} : Server Version: '+ server_version)
         # Mining section
         while True:
             soc.send(bytes(
@@ -115,7 +115,7 @@ while True:
                     feedback = soc.recv(1024).decode().rstrip("\n")
                     # If result was good
                     if feedback == "GOOD":
-                        print(f'{current_time()} : Accepted share',
+                        print "Accepted share",
                               result,
                               "Hashrate",
                               int(hashrate/1000),
@@ -126,7 +126,7 @@ while True:
                         break
                     # If result was incorrect
                     elif feedback == "BAD":
-                        print(f'{current_time()} : Rejected share',
+                        print "Rejected share",
                               result,
                               "Hashrate",
                               int(hashrate/1000),
@@ -137,6 +137,6 @@ while True:
                         break
 
     except Exception as e:
-        print(f'{current_time()} : Error occured: ' + str(e) + ", restarting in 5s.")
+        print "Error occured:"
         time.sleep(5)
         os.execl(sys.executable, sys.executable, *sys.argv)
